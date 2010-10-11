@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-# Last modified: 2010 Oct 11 05:58:29 PM CST
+# Last modified: 2010 Oct 11 05:56:08 PM CST
 #
 # LICENSE:
 # ***************************************************************************
@@ -50,7 +50,7 @@ def main():
     output = []
     for i in xrandr_output:
         if i == 'default:connected':
-            os.system("zenity --warning --title='提示' --text 'This script only support laptop'")
+            os.system("zenity --warning --title='提示' --text '此程式僅支援筆記型螢幕, 並不支援桌上機型'")
             sys.exit()
         if i != ':' and i != 'Screen:0:' and i != 'LVDS:connected' and i != 'LVDS1:connected':
             if i.split(':')[1] == 'connected':
@@ -66,9 +66,9 @@ def main():
             default_name = "LVDS1"
 
     if (len(output) == 0 or len(mon) == 0):
-        os.system("zenity --warning --title='提示' --text 'No external screen found, please check if it is not connected'")
+        os.system("zenity --warning --title='提示' --text '沒有發現外接螢幕, 請檢查影像連接線是否正確接上您的電腦'")
     else:
-        str = "zenity --width=400 --height=240 --list --radiolist --title='switch screen' --column='items' --column='summary' --column='details' "
+        str = "zenity --width=400 --height=240 --list --radiolist --title='切換顯示器' --column='選擇' --column='簡述' --column='詳述' "
         s = 0
         cmd = {}
         for i in range(len(mon)):
@@ -76,10 +76,10 @@ def main():
                 str+="TRUE "
             else:
                 str+="FALSE "
-            str+="'投影(" + mon[i] + ")' 'screen(" + mon[i] + ")' "
+            str+="'投影(" + mon[i] + ")' '使用本機與外接螢幕(" + mon[i] + ")' "
             cmd['投影(' + mon[i] + ')'] = "xrandr --output " + default_name + " --mode " + default_mode + " --pos 0x0 --output " + output[0] + " --mode " + mon[i] + " --right-of " + default_name
             s+=1
-        str+="FALSE 'laptop' 'disconnect external screen'"
+        str+="FALSE '本機' '只使用本機的螢幕'"
         cmd['本機'] = "xrandr --output " + output[0] + " --off"
 
         fout = subprocess.Popen(str, shell=True, bufsize=0, stdin=subprocess.PIPE, stdout=subprocess.PIPE, close_fds=True)

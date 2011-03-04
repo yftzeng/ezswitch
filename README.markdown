@@ -3,6 +3,10 @@ Easy Screen Switch Mode
 
 A very easy script to set dual screen for BSD/Linux.
 
+- ezswitch.py: English version
+- ezswitch-zh-tw.py: 繁體中文版本
+- ezswitch-zh-cn.py: 简体中文版本
+
 
 Author
 ======

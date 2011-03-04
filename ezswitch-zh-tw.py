@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-# Last modified: 2011 Mar 04 07:34:58 PM CST
+# Last modified: 2011 Mar 04 07:39:55 PM CST
 #
 # LICENSE:
 # ***************************************************************************
@@ -41,8 +41,8 @@ import commands
 import subprocess
 
 ## Change language
-lang = "en"
-#lang = "zh-tw"
+#lang = "en"
+lang = "zh-tw"
 #lang = "zh-cn"
 
 def i18n(str):

@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-# Last modified: 2011 Mar 04 07:39:55 PM CST
+# Last modified: 2011 Mar 07 04:49:44 PM CST
 #
 # LICENSE:
 # ***************************************************************************
@@ -30,8 +30,8 @@
 """
 """
 
-__version__ = "1.0"
-__revision__ = '1.0.0'
+__version__ = "1.4.1"
+__revision__ = '1.4.1'
 __author__ = "Yi-Feng Tzeng"
 __authorcontact__ = "yftzeng@gmail.com"
 __website__ = "http://antbsd.twbbs.org/"
@@ -166,10 +166,10 @@ def main():
             else:
                 str+="FALSE "
             str+="'" + i18n('projector') + "(" + mon[i] + ")' '" + i18n('external') + "(" + mon[i] + ")' "
-            cmd["'" + i18n('projector') + "(' + mon[i] + ')'"] = "xrandr --output " + default_name + " --mode " + default_mode + " --pos 0x0 --output " + output[0] + " --mode " + mon[i] + " --right-of " + default_name
+            cmd[i18n('projector') + "(" + mon[i] + ")"] = "xrandr --output " + default_name + " --mode " + default_mode + " --pos 0x0 --output " + output[0] + " --mode " + mon[i] + " --right-of " + default_name
             s+=1
         str+="FALSE '" + i18n("local") + "' '" + i18n('only-local') + "'"
-        cmd['本機'] = "xrandr --output " + output[0] + " --off"
+        cmd['本機'] = "xrandr --output " + output[0] + " --off --output " + default_name + " --mode " + default_mode
 
         fout = subprocess.Popen(str, shell=True, bufsize=0, stdin=subprocess.PIPE, stdout=subprocess.PIPE, close_fds=True)
         selected = fout.stdout.readline().strip()
@@ -177,6 +177,7 @@ def main():
         for k, v in cmd.iteritems():
             if selected == k:
                 os.system(v)
+                break
 
 if __name__ == '__main__':
     main()
